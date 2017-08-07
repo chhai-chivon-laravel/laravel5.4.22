@@ -16,13 +16,13 @@ class ProductController extends Controller
 	 */
 	public function index(Request $request)
 	{
-		$limit = 1;
+		$limit = 15;
 
 		if ($request->has('limit')) {
 			$limit = $request->get('limit');
 		}
 
-		dd(Session::all());
+		//dd(Session::all());
 
 		/*if (Session::has('session1')) {
 			$s1 = Session::get('session1');
@@ -37,7 +37,8 @@ class ProductController extends Controller
 
 
 
-		return Product::paginate($limit);
+		/*return Product::paginate($limit);*/
+		return view("products.list");
 	}
 
 	/**

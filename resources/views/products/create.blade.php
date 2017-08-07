@@ -8,6 +8,10 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<title>Product</title>
+	<!-- jQuery -->
+	<script src="{{ asset('js/jquery-3.2.1.min.js') }}"></script>
+	<!-- Custom CSS -->
+	<link href="{{ asset('font-awesome/font-awesome.css') }}" rel="stylesheet">
 </head>
 <body>
 	<form action="{{url('products')}}" method="POST">
