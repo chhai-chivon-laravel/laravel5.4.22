@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Product;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Session;
 
 
 class ProductController extends Controller
@@ -14,31 +13,15 @@ class ProductController extends Controller
 	 *
 	 * @return \Illuminate\Http\Response
 	 */
-	public function index(Request $request)
+	public function index()
 	{
-		$limit = 15;
+		/*$limit = 15;
 
 		if ($request->has('limit')) {
 			$limit = $request->get('limit');
-		}
-
-		//dd(Session::all());
-
-		/*if (Session::has('session1')) {
-			$s1 = Session::get('session1');
-			dd($s1);
-		}
-
-		dd(Session::all());*/
-
-		// TODO: create page view index
-
-		// TODO: list product with pagination
-
-
-
+		}*/
 		/*return Product::paginate($limit);*/
-		return view("products.list");
+		return Product::all();
 	}
 
 	/**
@@ -59,33 +42,19 @@ class ProductController extends Controller
 	 */
 	public function store(Request $request)
 	{
-		/*dd($request->all());*/
-		/*$product = new Product();
-		$product->name = $request->name;
-		$product->description = $request->get("description");
-		$product->save();*/
-
-		$pro = Product::create($request->all());
-
-		// TODO:  if error alert message else alert message success
-
-		$request->session()->put('session1', 'session1');
-
-		return redirect('products')->with('session2', 'session2');
+        $product = Product::create($request->all());
+        return response()->json($product, 201);
 	}
 
 	/**
 	 * Display the specified resource.
 	 *
-	 * @param  int $id
+	 * @param  Product $product
 	 * @return \Illuminate\Http\Response
 	 */
-	public function show($id)
+	public function show(Product $product)
 	{
-		$data = [];
-		$product = Product::findOrFail($id);
-		$data['pro'] = $product;
-		return view("products/show",$data);
+		return $product;
 	}
 
 	/**
@@ -96,30 +65,31 @@ class ProductController extends Controller
 	 */
 	public function edit($id)
 	{
-		// TODO: show view edit with product
+		return view('products/edit/'+$id);
 	}
 
 	/**
 	 * Update the specified resource in storage.
 	 *
 	 * @param  \Illuminate\Http\Request $request
-	 * @param  int $id
+	 * @param  Product $product
 	 * @return \Illuminate\Http\Response
 	 */
-	public function update(Request $request, $id)
+	public function update(Request $request,Product $product)
 	{
-		// TODO: find all product by id if product = null or not found redirect edit with error message
-		// TODO: update product by $id than redirect index page
+	    $product ->update($request->all());
+	    return response()->json($product,200);
 	}
 
 	/**
-	 * Remove the specified resource from storage.
+	 * Remove the specified resource f//rom storage.
 	 *
-	 * @param  int $id
+	 * @param  Product $product
 	 * @return \Illuminate\Http\Response
 	 */
-	public function destroy($id)
+	public function destroy(Product $product)
 	{
-		//
+       $product->delete();
+       return response()->json(null,204);
 	}
 }
