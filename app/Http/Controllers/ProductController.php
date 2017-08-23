@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 
 class ProductController extends Controller
@@ -20,8 +21,9 @@ class ProductController extends Controller
 		if ($request->has('limit')) {
 			$limit = $request->get('limit');
 		}*/
-		/*return Product::paginate($limit);*/
-		return Product::all();
+
+		$products = Product::paginate(15);
+		return $products;
 	}
 
 	/**
