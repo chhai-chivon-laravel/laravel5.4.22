@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('products.list');
 });
 
 //Route::get("/users", function (){
@@ -39,4 +39,4 @@ Route::put("/products/update/{id}", "ProductController@update");
 Route::delete("/products/destroy/{id}", "ProductController@destroy");
 */
 
-Route::resource("products","ProductController");
+/*Route::resource("products","ProductController");*/
